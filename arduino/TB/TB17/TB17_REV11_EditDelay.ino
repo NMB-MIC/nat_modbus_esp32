@@ -23,7 +23,7 @@ const char* password = "natmms22"; // ****** Change password *********
 //const char* password = "98148813";
 const char* mqtt_server = "192.168.1.2";  // ****** mqtt server *********
 
-IPAddress local_IP(192, 168, 1, 57); // ******Change ip *********
+IPAddress local_IP(192, 168, 1, 32); // ******Change ip *********
 IPAddress gateway(192, 168, 1, 1);    // Gateway IP address
 IPAddress subnet(255, 255, 255, 0);     // subnet
 
@@ -187,8 +187,8 @@ void setup()
   client.setCallback(callback);
 }
 
-String rssi,M34,D330,D332,D334,D336,D338,D340,D342,D344,D346,D348,D350,D226,D100,D102,D104,D106,D108,D110,D112,D114,M36,D362,D364,D368,D370,D356,D372,D354,D366,D116,D122,D126,D128,D118,D120,D124,D286,D32,D500,B9,D708,D608,D508,DB1,DB2,DB6,M205,D60,D1366,D1368,D1370,D1372,D1374,D1376,D1378,D1380,D1266,D1268;
-char i_rssi[16],i0[16],i1[16],i2[16],i3[16],i4[16],i5[16],i6[16],i7[16],i8[16],i9[16],i10[16],i11[16],i12[16],i13[16],i14[16],i15[16],i16[16],i17[16],i18[16],i19[16],i20[16],i21[16],i22[16],i23[16],i24[16],i25[16],i26[16],i27[16],i28[16],i29[16],i30[16],i31[16],i32[16],i33[16],i34[16],i35[16],i36[16],i37[16],i38[16],i39[16],i40[16],i41[16],i42[16],i43[16],i44[16],i45[16],i46[16],i47[16],i48[16],i49[16],i50[16],i51[16],i52[16],i53[16],i54[16],i55[16],i56[16],i57[16],i58[16];
+String rssi,M34,D330,D332,D334,D336,D338,D340,D342,D344,D346,D348,D350,D226,D100,D102,D104,D106,D108,D110,D112,D114,M36,D362,D364,D368,D370,D356,D372,D354,D366,D116,D122,D126,D128,D118,D120,D124,D286,D32,D500,B9,D708,D608,D508,DB1,DB2,DB6,M205,D60,D1366,D1368,D1370,D1372,D1374,D1376,D1378,D1380,D1266,D1268,D996;
+char i_rssi[16],i0[16],i1[16],i2[16],i3[16],i4[16],i5[16],i6[16],i7[16],i8[16],i9[16],i10[16],i11[16],i12[16],i13[16],i14[16],i15[16],i16[16],i17[16],i18[16],i19[16],i20[16],i21[16],i22[16],i23[16],i24[16],i25[16],i26[16],i27[16],i28[16],i29[16],i30[16],i31[16],i32[16],i33[16],i34[16],i35[16],i36[16],i37[16],i38[16],i39[16],i40[16],i41[16],i42[16],i43[16],i44[16],i45[16],i46[16],i47[16],i48[16],i49[16],i50[16],i51[16],i52[16],i53[16],i54[16],i55[16],i56[16],i57[16],i58[16],i59[16];
 
 void loop() 
 {
@@ -558,6 +558,12 @@ void loop()
   Serial.println(node.getResponseBuffer(0));
   D1268 = node.getResponseBuffer(0);
   node.clearResponseBuffer(); 
+
+  node.readHoldingRegisters(52, 1); 
+  Serial.print("D996 : ");
+  Serial.println(node.getResponseBuffer(0));
+  D996 = node.getResponseBuffer(0);
+  node.clearResponseBuffer(); 
   
   delay(500);
   led_blue();
@@ -621,6 +627,7 @@ void loop()
   D1372.toCharArray(i56, 16);client.publish("TB17/D1380", i56);
   D1372.toCharArray(i57, 16);client.publish("TB17/D1266", i57);
   D1372.toCharArray(i58, 16);client.publish("TB17/D1268", i58);
+  D996.toCharArray(i59, 16);client.publish("TB17/D996", i59);
   
   
   Serial.println("\n---------------finish loop------------------\n\n");
